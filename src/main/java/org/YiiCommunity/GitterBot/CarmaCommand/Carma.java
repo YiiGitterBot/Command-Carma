@@ -12,9 +12,6 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
-/**
- * Created by Alex on 10/23/15.
- */
 public class Carma extends Command {
     private List<String> commands = new ArrayList<>();
 
