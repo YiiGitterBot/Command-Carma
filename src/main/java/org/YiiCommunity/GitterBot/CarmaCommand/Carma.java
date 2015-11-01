@@ -25,7 +25,16 @@ public class Carma extends Command {
             for (String item : commands) {
                 if (message.text.equalsIgnoreCase(item)) {
                     User user = User.getUser(message.fromUser.username);
-                    Gitter.sendMessage("@" + user.getUsername() + " твоя карма нынче **" + (user.getCarma() >= 0 ? "+" : "-") + user.getCarma() + "**\n" + getThanks(user) + "\n" + getAchievements(user));
+                    Gitter.sendMessage(
+                            getConfig()
+                                    .getString("yourCarma", "@{username} your carma right now is **{carma}**\n" +
+                                            "You said thanks **{thanks}** times\n" +
+                                            "{achievements}")
+                                    .replace("{username}", user.getUsername())
+                                    .replace("{carma}", (user.getCarma() >= 0 ? "+" : "-") + user.getCarma())
+                                    .replace("{thanks}", user.getThanks().toString())
+                                    .replace("{achievements}", getAchievements(user))
+                    );
                     return;
                 }
             }
@@ -34,7 +43,16 @@ public class Carma extends Command {
 
             while (m.find()) {
                 User receiver = User.getUser(m.group(1));
-                Gitter.sendMessage("Карма @" + receiver.getUsername() + " нынче **" + (receiver.getCarma() >= 0 ? "+" : "-") + receiver.getCarma() + "**\n" + getThanks(receiver) + "\n" + getAchievements(receiver));
+                Gitter.sendMessage(
+                        getConfig()
+                                .getString("yourCarma", "User @{username} have **{carma}** carma right now\n" +
+                                        "He said thanks **{thanks}** times\n" +
+                                        "{achievements}")
+                                .replace("{username}", receiver.getUsername())
+                                .replace("{carma}", (receiver.getCarma() >= 0 ? "+" : "-") + receiver.getCarma())
+                                .replace("{thanks}", receiver.getThanks().toString())
+                                .replace("{achievements}", getAchievements(receiver))
+                );
                 receiver.updateAchievements();
             }
         } catch (Exception e) {
@@ -42,15 +60,11 @@ public class Carma extends Command {
         }
     }
 
-    private String getThanks(User user) {
-        return "Сказал спасибо **" + user.getThanks() + "** раз";
-    }
-
     private String getAchievements(User user) {
         if (user.getAchievements().isEmpty())
-            return "Пока достижений нет.";
+            return getConfig().getString("noAchievements", "No achievements yet.");
 
         List<String> list = user.getAchievements().stream().map(item -> item.getAchievement().getTitle()).collect(Collectors.toList());
-        return "Достижения: " + String.join(", ", list);
+        return getConfig().getString("achievements", "Achievements: {list}").replace("{list}", String.join(", ", list));
     }
 }

@@ -1,4 +1,12 @@
 commands:
-    - карма
     - carma
     - karma
+messages:
+    yourCarma: "@{username} your carma right now is **{carma}**
+You said thanks **{thanks}** times
+{achievements}"
+    userCarma: "User @{username} has **{carma}** carma right now
+He said thanks **{thanks}** times
+{achievements}"
+    noAchievements: "No achievements yet."
+    achievements: "Achievements: {list}"
