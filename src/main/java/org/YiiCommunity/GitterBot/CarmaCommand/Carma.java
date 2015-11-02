@@ -27,7 +27,7 @@ public class Carma extends Command {
                     User user = User.getUser(message.fromUser.username);
                     Gitter.sendMessage(
                             getConfig()
-                                    .getString("yourCarma", "@{username} your carma right now is **{carma}**\n" +
+                                    .getString("messages.yourCarma", "@{username} your carma right now is **{carma}**\n" +
                                             "You said thanks **{thanks}** times\n" +
                                             "{achievements}")
                                     .replace("{username}", user.getUsername())
@@ -45,7 +45,7 @@ public class Carma extends Command {
                 User receiver = User.getUser(m.group(1));
                 Gitter.sendMessage(
                         getConfig()
-                                .getString("yourCarma", "User @{username} have **{carma}** carma right now\n" +
+                                .getString("messages.yourCarma", "User @{username} have **{carma}** carma right now\n" +
                                         "He said thanks **{thanks}** times\n" +
                                         "{achievements}")
                                 .replace("{username}", receiver.getUsername())
@@ -62,9 +62,9 @@ public class Carma extends Command {
 
     private String getAchievements(User user) {
         if (user.getAchievements().isEmpty())
-            return getConfig().getString("noAchievements", "No achievements yet.");
+            return getConfig().getString("messages.noAchievements", "No achievements yet.");
 
         List<String> list = user.getAchievements().stream().map(item -> item.getAchievement().getTitle()).collect(Collectors.toList());
-        return getConfig().getString("achievements", "Achievements: {list}").replace("{list}", String.join(", ", list));
+        return getConfig().getString("messages.achievements", "Achievements: {list}").replace("{list}", String.join(", ", list));
     }
 }
