@@ -1,6 +1,7 @@
 package org.YiiCommunity.GitterBot.CarmaCommand;
 
 import com.amatkivskiy.gitter.rx.sdk.model.response.message.MessageResponse;
+import com.amatkivskiy.gitter.rx.sdk.model.response.room.RoomResponse;
 import org.YiiCommunity.GitterBot.api.Command;
 import org.YiiCommunity.GitterBot.containers.Gitter;
 import org.YiiCommunity.GitterBot.models.database.User;
@@ -20,12 +21,12 @@ public class Carma extends Command {
     }
 
     @Override
-    public void onMessage(MessageResponse message) {
+    public void onMessage(RoomResponse room, MessageResponse message) {
         try {
             for (String item : commands) {
                 if (message.text.equalsIgnoreCase(item)) {
                     User user = User.getUser(message.fromUser.username);
-                    Gitter.sendMessage(
+                    Gitter.sendMessage(room,
                             getConfig()
                                     .getString("messages.yourCarma", "@{username} your carma right now is **{carma}**\n" +
                                             "You said thanks **{thanks}** times\n" +
@@ -43,7 +44,7 @@ public class Carma extends Command {
 
             while (m.find()) {
                 User receiver = User.getUser(m.group(1));
-                Gitter.sendMessage(
+                Gitter.sendMessage(room,
                         getConfig()
                                 .getString("messages.yourCarma", "User @{username} have **{carma}** carma right now\n" +
                                         "He said thanks **{thanks}** times\n" +
@@ -53,7 +54,6 @@ public class Carma extends Command {
                                 .replace("{thanks}", receiver.getThanks().toString())
                                 .replace("{achievements}", getAchievements(receiver))
                 );
-                receiver.updateAchievements();
             }
         } catch (Exception e) {
             L.$(e.getMessage());
