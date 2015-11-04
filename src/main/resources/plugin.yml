@@ -2,11 +2,11 @@ commands:
     - carma
     - karma
 messages:
-    yourCarma: "@{username} your carma right now is **{carma}**
-You said thanks **{thanks}** times
+    yourCarma: "@{username} your carma right now is **{carma}**\n
+You said thanks **{thanks}** times\n
 {achievements}"
-    userCarma: "User @{username} has **{carma}** carma right now
-He said thanks **{thanks}** times
+    userCarma: "User @{username} has **{carma}** carma right now\n
+He said thanks **{thanks}** times\n
 {achievements}"
     noAchievements: "No achievements yet."
     achievements: "Achievements: {list}"
