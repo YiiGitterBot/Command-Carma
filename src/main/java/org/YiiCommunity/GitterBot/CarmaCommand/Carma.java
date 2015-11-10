@@ -28,7 +28,7 @@ public class Carma extends Command {
                     User user = User.getUser(message.fromUser.username);
                     Gitter.sendMessage(room,
                             getConfig()
-                                    .getString("messages.yourCarma", "@{username} your carma right now is **{carma}**\n" +
+                                    .getString("messages.userCarma", "@{username} your carma right now is **{carma}**\n" +
                                             "You said thanks **{thanks}** times\n" +
                                             "{achievements}")
                                     .replace("{username}", user.getUsername())
