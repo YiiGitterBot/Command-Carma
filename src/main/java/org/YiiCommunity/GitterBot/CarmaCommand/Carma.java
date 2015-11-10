@@ -28,7 +28,7 @@ public class Carma extends Command {
                     User user = User.getUser(message.fromUser.username);
                     Gitter.sendMessage(room,
                             getConfig()
-                                    .getString("messages.userCarma", "@{username} your carma right now is **{carma}**\n" +
+                                    .getString("messages.yourCarma", "@{username} your carma right now is **{carma}**\n" +
                                             "You said thanks **{thanks}** times\n" +
                                             "{achievements}")
                                     .replace("{username}", user.getUsername())
@@ -46,7 +46,7 @@ public class Carma extends Command {
                 User receiver = User.getUser(m.group(1));
                 Gitter.sendMessage(room,
                         getConfig()
-                                .getString("messages.yourCarma", "User @{username} have **{carma}** carma right now\n" +
+                                .getString("messages.userCarma", "User @{username} have **{carma}** carma right now\n" +
                                         "He said thanks **{thanks}** times\n" +
                                         "{achievements}")
                                 .replace("{username}", receiver.getUsername())
