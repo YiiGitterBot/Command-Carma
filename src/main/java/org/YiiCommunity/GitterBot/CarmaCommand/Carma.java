@@ -1,7 +1,7 @@
 package org.YiiCommunity.GitterBot.CarmaCommand;
 
-import com.amatkivskiy.gitter.rx.sdk.model.response.message.MessageResponse;
-import com.amatkivskiy.gitter.rx.sdk.model.response.room.RoomResponse;
+import com.amatkivskiy.gitter.sdk.model.response.message.MessageResponse;
+import com.amatkivskiy.gitter.sdk.model.response.room.RoomResponse;
 import org.YiiCommunity.GitterBot.api.Command;
 import org.YiiCommunity.GitterBot.containers.Gitter;
 import org.YiiCommunity.GitterBot.models.database.User;
